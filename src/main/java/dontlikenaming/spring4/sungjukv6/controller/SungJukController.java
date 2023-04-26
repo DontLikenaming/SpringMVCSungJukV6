@@ -39,6 +39,7 @@ public class SungJukController {
         return mav;
     }
 
+
     // 성적 입력폼 표시
     @GetMapping(value = "/add")
     public String add(){
@@ -60,6 +61,7 @@ public class SungJukController {
         return mv;
     }
 
+
     // 성적 상세 조회 처리
     @GetMapping(value = "/view")
     public ModelAndView listOne(@RequestParam int sjno){
@@ -77,4 +79,17 @@ public class SungJukController {
         return mav;
     }
 
+
+    // 성적 수정
+
+
+    // 성적 삭제폼 표시
+    @GetMapping(value = "/remove")
+    public String delete(int sjno){
+        sjsrv.removeSungJuk(sjno);
+
+        // forward  : 서버에서 내부로 /list를 호출함
+        // redirect : 클라이언트에게 /list를 서버에 요청하도록 지시
+        return "redirect:/list";
+    }
 }
