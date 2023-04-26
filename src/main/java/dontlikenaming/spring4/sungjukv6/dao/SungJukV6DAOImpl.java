@@ -1,5 +1,6 @@
 package dontlikenaming.spring4.sungjukv6.dao;
 
+import com.sun.org.apache.bcel.internal.generic.ObjectType;
 import dontlikenaming.spring4.sungjukv6.model.SungJukVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,11 +30,15 @@ public class SungJukV6DAOImpl implements SungJukV4DAO{
 
     @Override
     public int insertSungJuk(SungJukVO sjs) {
-        int cnt = -1;
+        // 매개변수 정의
+        Object params = new Object[]{
+            sjs.getName(), sjs.getKor(),
+            sjs.getEng(), sjs.getMat(),
+            sjs.getTot(),sjs.getAvg(),
+            sjs.getGrd()
+        };
 
-
-
-        return cnt;
+        return jdbcTemplate.update(insertSQL, params);
     }
 
     @Override
