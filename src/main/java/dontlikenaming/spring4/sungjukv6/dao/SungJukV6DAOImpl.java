@@ -78,10 +78,29 @@ public class SungJukV6DAOImpl implements SungJukV4DAO{
     }
 
     @Override
-    public SungJukVO selectOneSungJuk(int sjnum) {
-        SungJukVO sj = null;
+    public SungJukVO selectOneSungJuk(int sjno) {
+        Object[] params = new Object[]{ sjno };
+        RowMapper<SungJukVO> mapper = new SungJukOneMapper();
+        SungJukVO sj = jdbcTemplate.queryForObject(
+                selectOneSQL, mapper, params
+        );
 
         return sj;
+    }
+
+    private class SungJukOneMapper implements RowMapper<SungJukVO> {
+        @Override
+        public SungJukVO mapRow(ResultSet rs, int num) throws SQLException {
+            SungJukVO sj = new SungJukVO(
+                    rs.getString(2),rs.getInt(3),
+                    rs.getInt(4), rs.getInt(5),
+                    rs.getInt(6), rs.getDouble(7),
+                    rs.getString(8).charAt(0),
+                    rs.getString(9));
+            sj.setSjno(rs.getInt(1));
+
+            return sj;
+        }
     }
 
     @Override
@@ -97,6 +116,5 @@ public class SungJukV6DAOImpl implements SungJukV4DAO{
 
         return cnt;
     }
-
 
 }

@@ -62,7 +62,8 @@ public class SungJukV6ServiceImpl implements SungJukV6Service {
     }
 
     public SungJukVO readOneSungJuk(int sjno) {
-        return null;
+
+        return sjdao.selectOneSungJuk(sjno);
     }
 
     public boolean modifySungJuk(SungJukVO sj) {

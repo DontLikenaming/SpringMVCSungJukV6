@@ -6,10 +6,7 @@ import dontlikenaming.spring4.sungjukv6.service.SungJukV6Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -62,4 +59,22 @@ public class SungJukController {
 
         return mv;
     }
+
+    // 성적 상세 조회 처리
+    @GetMapping(value = "/view")
+    public ModelAndView listOne(@RequestParam int sjno){
+        ModelAndView mav = new ModelAndView();
+        String view = "sungjukfail";
+        SungJukVO sj = sjsrv.readOneSungJuk(sjno);
+
+        if(sj!=null) {
+            view = "sungjukview";
+            mav.addObject("sj", sj);
+        }
+
+        mav.setViewName(view);
+
+        return mav;
+    }
+
 }
