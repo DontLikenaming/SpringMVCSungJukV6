@@ -18,11 +18,12 @@ public class SungJukV6ServiceImpl implements SungJukV6Service {
         this.sjdao = sjdao;
     }
 
+    //성적 데이터 저장
+    public boolean newSungJuk(SungJukVO sj) {
+        return false;
+    }
 
-    public void newSungJuk() {}
-
-
-
+    // 성적 데이터 처리
     public void computeSungJuk(SungJukVO sj) {
 
     }
@@ -33,15 +34,15 @@ public class SungJukV6ServiceImpl implements SungJukV6Service {
         return sjdao.selectSungJuk();
     }
 
-    public void readOneSungJuk() {
-
+    public SungJukVO readOneSungJuk(int sjno) {
+        return null;
     }
 
-    public void modifySungJuk() {
-
+    public boolean modifySungJuk(SungJukVO sj) {
+        return false;
     }
 
-    public void removeSungJuk() {
-
+    public boolean removeSungJuk(int sjno) {
+        return false;
     }
 }
