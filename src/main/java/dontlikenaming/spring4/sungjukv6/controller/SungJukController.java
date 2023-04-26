@@ -52,8 +52,14 @@ public class SungJukController {
     @PostMapping(value = "/add")
     public ModelAndView addok(SungJukVO sj){
         ModelAndView mv = new ModelAndView();
-        mv.addObject("sj", sj);
-        mv.setViewName("sungjukok");
+        String view = "sungjukfail";
+        if(sjsrv.newSungJuk(sj)) {
+            view = "sungjukok";
+            mv.addObject("sj", sj);
+        }
+
+        mv.setViewName(view);
+
         return mv;
     }
 }

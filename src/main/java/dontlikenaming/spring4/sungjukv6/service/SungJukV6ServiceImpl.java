@@ -5,6 +5,9 @@ import dontlikenaming.spring4.sungjukv6.model.SungJukVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -20,12 +23,33 @@ public class SungJukV6ServiceImpl implements SungJukV6Service {
 
     //성적 데이터 저장
     public boolean newSungJuk(SungJukVO sj) {
-        return false;
+        boolean result = false;
+        this.computeSungJuk(sj);
+        if(sjdao.insertSungJuk(sj)>0) result = true;
+
+        return result;
     }
 
     // 성적 데이터 처리
     public void computeSungJuk(SungJukVO sj) {
+        sj.setTot( sj.getKor() + sj.getEng() + sj.getMat() );
+        sj.setAvg( (double) sj.getTot() / 3 );
 
+        switch ((int)(sj.getAvg()/10)) {
+            case 10: case 9: sj.setGrd('수'); break;
+            case 8: sj.setGrd('우'); break;
+            case 7: sj.setGrd('미'); break;
+            case 6: sj.setGrd('양'); break;
+            default: sj.setGrd('가'); break;
+        }
+
+        LocalDate nowaday = LocalDate.now();
+        LocalTime nowatime = LocalTime.now();
+        DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formatedNow = nowaday.format(dayFormatter) + " ";
+        formatedNow += nowatime.format(timeFormatter);
+        sj.setRegdate(formatedNow);
     }
 
     // 성적 리스트 받아옴
