@@ -105,9 +105,13 @@ public class SungJukV6DAOImpl implements SungJukV4DAO{
 
     @Override
     public int updateSungJuk(SungJukVO sjs) {
-        int cnt = -1;
+        Object[] params = new Object[] {
+                sjs.getKor(), sjs.getEng(), sjs.getMat(),
+                sjs.getTot(), sjs.getAvg(), sjs.getGrd()+"",
+                sjs.getSjno()
+        };
 
-        return cnt;
+        return jdbcTemplate.update(updateSQL, params);
     }
 
     @Override

@@ -92,4 +92,24 @@ public class SungJukController {
         // redirect : 클라이언트에게 /list를 서버에 요청하도록 지시
         return "redirect:/list";
     }
+
+
+    // 성적 수정
+    @GetMapping(value = "/modify")
+    public ModelAndView modify(@RequestParam int sjno){
+        ModelAndView mv = new ModelAndView();
+
+        mv.addObject("sj", sjsrv.readOneSungJuk(sjno));
+        mv.setViewName("sungjukmod");
+
+        return mv;
+    }
+
+    // 성적 수정
+    @PostMapping(value = "/modify")
+    public String modifyok(SungJukVO sj){
+        return null;
+    }
+
+
 }
