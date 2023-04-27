@@ -8,6 +8,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
         "classpath:root-context.xml","classpath:servlet-context.xml"
@@ -20,6 +24,14 @@ public class SungJukV6DAOTest {
     // 독립적으로 테스트하는 것
     // "어떤 기능이 실행되면 어떤 결과가 나온다" 수준으로 테스트 함
 
+    // 테스트 결과 학인은 assertXXX 메서드를 이용함
+    // assertEquals(x, y) : 객체 x와 y가 같은지 확인
+    // assertNotEquals(x, y) : 객체 x와 y가 다른지 확인
+    // assertNull(x) : x가 Null 인지 확인
+    // assertNotnull(x) : x가 Null이 아닌지 확인
+    // assertTrue(x) : x가 True 인지 확인
+    // assertFalse(x) : x가 False 인지 확인
+
     @Autowired SungJukV4DAO sjdao;
 
     @Test   // 테스트 슈트
@@ -27,6 +39,7 @@ public class SungJukV6DAOTest {
         System.out.println(">> Test 1 시작");
         List<SungJukVO> sjs = sjdao.selectSungJuk();
         System.out.println(sjs);
+        assertNotNull(sjs);
     }
 
     @Test
