@@ -108,7 +108,10 @@ public class SungJukController {
     // 성적 수정
     @PostMapping(value = "/modify")
     public String modifyok(SungJukVO sj){
-        return null;
+        String view = "sungjukfail";
+        if(sjsrv.modifySungJuk(sj)) view = "redirect:/view?sjno="+sj.getSjno();
+
+        return view;
     }
 
 

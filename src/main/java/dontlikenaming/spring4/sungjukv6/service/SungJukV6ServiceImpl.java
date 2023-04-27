@@ -67,6 +67,7 @@ public class SungJukV6ServiceImpl implements SungJukV6Service {
     }
 
     public boolean modifySungJuk(SungJukVO sj) {
+        this.computeSungJuk(sj);
         boolean result = (sjdao.updateSungJuk(sj) > 0);
 
         return result;

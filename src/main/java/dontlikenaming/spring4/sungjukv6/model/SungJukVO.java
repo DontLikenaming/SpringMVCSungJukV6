@@ -18,6 +18,13 @@ public class SungJukVO {
         this.mat = mat;
     }
 
+    public SungJukVO(int sjno, int kor, int eng, int mat){
+        this.sjno = sjno;
+        this.kor = kor;
+        this.eng = eng;
+        this.mat = mat;
+    }
+
     public SungJukVO(int sjno, String name, int kor, int eng, int mat, int tot, double avg, char grd, String regdate) {
         this(sjno, name, kor, eng, mat);
         this.mat = mat;
